@@ -32,7 +32,7 @@ const Navbar = ({ children }) => {
                 </li>
 
                 <li class="nav-item">
-                  <Link to="/posts" class="nav-link">
+                  <Link to="/add-post" class="nav-link">
                     Add post
                   </Link>
                 </li>
