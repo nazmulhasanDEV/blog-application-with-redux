@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { posts } from "./postSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { size } from "lodash";
+import { posts } from "./postSlice";
+import { allPosts } from "./postSlice";
+import ReactionEmoji from "./ReactionEmoji";
 
 const Posts = () => {
-  const posts = useSelector((state) => console.log(state));
+  const posts = useSelector(allPosts);
   return (
     <>
-      <div className="row">
-        <div className="col-md-4">
-          <div class="card" style={{ width: "100%" }}>
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">
-                Go somewhere
-              </a>
-            </div>
-          </div>
+      <div className="row pt-5">
+        <div className="col">
+          <h2>All posts</h2>
         </div>
+      </div>
+      <div className="row mt-5">
+        {size(posts) ? (
+          posts?.map((post) => {
+            return (
+              <div className="col-md-3">
+                <div class="card" style={{ width: "100%" }}>
+                  <img src={post.img} class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">{post?.title}</h5>
+                    <p class="card-text">{post.content}</p>
+                    <div className="p-2">
+                      <ReactionEmoji post={post} />
+                    </div>
+                    <a href="#" class="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <h3 className="text-center">No posts found</h3>
+        )}
       </div>
     </>
   );
