@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
-const initialState = [
+const posts = [
   {
     id: nanoid(),
     img: "https://picsum.photos/300",
@@ -44,13 +44,19 @@ const initialState = [
   },
 ];
 
+const initialState = {
+  posts: posts,
+  status: "idle",
+  error: null,
+};
+
 export const postSlice = createSlice({
   name: "postSlice",
   initialState,
   reducers: {
     addNewPost: {
       reducer(state, action) {
-        state.push(action.payload);
+        state.posts.push(action.payload);
       },
       prepare(post) {
         console.log("post in prepare", post);
@@ -67,10 +73,12 @@ export const postSlice = createSlice({
       },
     },
     reactions: (state, action) => {
-      console.log(state, action.payload);
-      console.log(state);
-      const post = state?.find((item) => item?.id === action?.payload?.postId);
-      console.log(post);
+      // console.log(state, action.payload);
+      // console.log(state);
+      const post = state?.posts?.find(
+        (item) => item?.id === action?.payload?.postId
+      );
+      // console.log(post);
       if (post) {
         post.reactions[action.payload.reaction]++;
       }
@@ -81,7 +89,7 @@ export const postSlice = createSlice({
 
 export const { addNewPost, reactions } = postSlice.actions;
 export const allPosts = (state) => {
-  return state.posts;
+  return state.posts.posts;
 };
 
 export default postSlice.reducer;
