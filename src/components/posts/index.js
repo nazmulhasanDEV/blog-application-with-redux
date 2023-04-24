@@ -14,7 +14,7 @@ const Posts = () => {
           <h2>All posts</h2>
         </div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-1 gy-5">
         {size(posts) ? (
           posts?.map((post) => {
             return (

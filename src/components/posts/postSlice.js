@@ -55,7 +55,14 @@ export const postSlice = createSlice({
       prepare(post) {
         console.log("post in prepare", post);
         return {
-          payload: { ...post, img: "https://picsum.photos/500" },
+          payload: {
+            ...post,
+            img: "https://picsum.photos/500",
+            reactions: {
+              thumbsUp: 10,
+              thumbsDown: 0,
+            },
+          },
         };
       },
     },
