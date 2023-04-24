@@ -10,7 +10,6 @@ const AddPost = () => {
     title: "",
     content: "",
   });
-  console.log(post);
   const onChangeHandler = (event) => {
     setPost({ ...post, [event.target.name]: event.target.value });
   };
